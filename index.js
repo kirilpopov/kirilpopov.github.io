@@ -56,8 +56,10 @@ const requireAuth = async (fn, targetUrl) => {
 const done = async () => {
     const user = await auth0.getUser();
     const claims = await auth0.getIdTokenClaims();
+	const token = await auth0.getTokenSilently();
+	console.log(token);
     // this will close the auth window
-    glue42gd.authDone({ user: user.username, token: claims.__raw });
+    glue42gd.authDone({ user: user.username, token });
 };
 
 // Will run when page finishes loading
