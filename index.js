@@ -6,7 +6,7 @@ const login = async (targetUrl) => {
         console.log("Logging in", targetUrl);
 
         const options = {
-            redirect_uri:  redirect_uri: window.location.origin
+            redirect_uri:  window.location.origin
         };
 
         if (targetUrl) {
