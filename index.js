@@ -33,8 +33,7 @@ const configureClient = async () => {
 
 
 const done = async () => {
-    const user = await auth0.getUser();
-    const claims = await auth0.getIdTokenClaims();
+    const user = await auth0.getUser();    
 	const token = await auth0.getTokenSilently();
 	console.log(token);
     // this will close the auth window
