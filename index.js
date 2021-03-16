@@ -1,20 +1,10 @@
 /**
  * Starts the authentication flow
  */
-const login = async (targetUrl) => {
+const login = async () => {
     try {
-        console.log("Logging in", targetUrl);
-
-        const options = {
-            redirect_uri:  window.location.origin,
-			audience: "https://serverx.glue42.com",
-        };
-
-        if (targetUrl) {
-            options.appState = { targetUrl };
-        }
-
-        await auth0.loginWithRedirect(options);
+        console.log("Logging in");        
+        await auth0.loginWithRedirect();
     } catch (err) {
         console.log("Log in failed", err);
     }
@@ -35,24 +25,12 @@ const configureClient = async () => {
 
     auth0 = await createAuth0Client({
         domain: config.domain,
-        client_id: config.clientId		
+        client_id: config.clientId,
+		audience: "https://serverx.glue42.com",
+		redirect_uri:  window.location.origin,			
     });
 };
 
-/**
- * Checks to see if the user is authenticated. If so, `fn` is executed. Otherwise, the user
- * is prompted to log in
- * @param {*} fn The function to execute if the user is logged in
- */
-const requireAuth = async (fn, targetUrl) => {
-    const isAuthenticated = await auth0.isAuthenticated();
-
-    if (isAuthenticated) {
-        return fn();
-    }
-
-    return login(targetUrl);
-};
 
 const done = async () => {
     const user = await auth0.getUser();
