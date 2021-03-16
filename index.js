@@ -6,7 +6,8 @@ const login = async (targetUrl) => {
         console.log("Logging in", targetUrl);
 
         const options = {
-            redirect_uri:  window.location.origin
+            redirect_uri:  window.location.origin,
+			audience: "https://serverx.glue42.com",
         };
 
         if (targetUrl) {
